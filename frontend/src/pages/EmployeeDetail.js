@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import API from '../services/api';
+import {API} from '../services/api';
 
 
 const EmployeeDetail = () => {
