@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import API from './api';
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -9,7 +10,8 @@ const EmployeeList = () => {
   
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/list/');
+      //const response = await axios.get('http://127.0.0.1:8000/api/list/');
+      const response = await API.get('list/');
       setEmployees(response.data);
       setLoading(false);
     } catch (error) {
@@ -26,7 +28,8 @@ const EmployeeList = () => {
   const deleteEmployee = async (dbId) => {
     if (window.confirm("Are you sure you want to delete this record?")) {
       try {
-        await axios.delete('http://127.0.0.1:8000/api/delete/', {
+        //await axios.delete('http://127.0.0.1:8000/api/delete/', {
+        await API.delete('delete/', {
           data: { id: dbId } 
         });
         

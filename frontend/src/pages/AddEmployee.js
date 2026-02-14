@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API from './api';
 import { useNavigate } from 'react-router-dom';
 
 const AddEmployee = () => {
@@ -21,7 +22,8 @@ const AddEmployee = () => {
     e.preventDefault();
     try {
     
-      await axios.post('http://127.0.0.1:8000/api/create/', employee);
+      //await axios.post('http://127.0.0.1:8000/api/create/', employee);
+      await API.post('create/', employee);
       alert('Employee Added Successfully!');
       navigate('/'); 
     } catch (error) {

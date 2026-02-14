@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API from './api';
 
 const EmployeeDetail = () => {
   const { id } = useParams(); 
@@ -15,12 +16,14 @@ const EmployeeDetail = () => {
   const fetchData = useCallback(async () => {
     try {
       
-      const empRes = await axios.get('http://127.0.0.1:8000/api/list/');
+      //const empRes = await axios.get('http://127.0.0.1:8000/api/list/');
+      const empRes = await API.get('list/');
       const currentEmp = empRes.data.find(e => e.id === parseInt(id));
       setEmployee(currentEmp);
 
       
-      const attRes = await axios.get(`http://127.0.0.1:8000/api/attendance/list/?employee_id=${id}`);
+      //const attRes = await axios.get(`http://127.0.0.1:8000/api/attendance/list/?employee_id=${id}`);
+      const attRes = await API.get(`attendance/list/?employee_id=${id}`);
       setAttendance(attRes.data);
       setFilteredAttendance(attRes.data);
       setLoading(false);
@@ -48,7 +51,8 @@ const EmployeeDetail = () => {
   const handleMarkAttendance = async (statusType) => {
     try {
       const today = new Date().toISOString().split('T')[0];
-      await axios.post(`http://127.0.0.1:8000/api/attendance/mark/${id}/`, {
+      //await axios.post(`http://127.0.0.1:8000/api/attendance/mark/${id}/`, {
+      await API.post(`attendance/mark/${id}/`, {
         date: today,
         status: statusType 
       });
